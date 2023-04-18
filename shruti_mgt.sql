@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2023 at 05:30 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Apr 18, 2023 at 04:56 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,17 +40,22 @@ CREATE TABLE `add_emp` (
   `degree` varchar(15) NOT NULL,
   `salary` int(10) NOT NULL,
   `pic` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `add_emp`
 --
 
 INSERT INTO `add_emp` (`id`, `full_name`, `email`, `password`, `birthdate`, `gender`, `contact_no`, `address`, `department`, `degree`, `salary`, `pic`) VALUES
-(42, 'maya', 'maya123@gmail.com', '1234', '2023-04-12', 'Female', '9535447674', 'USA', 'admin', 'mba', 15000, ''),
 (101, 'shruti', 'shruti@gmail.com', '1234', '2023-04-21', 'Female', '9743455434', 'uhgbkjf', 'fgh', 'mba', 54645, '1548982.jpg'),
-(102, 'maya', 'maya123@gmail.com', '1234', '2023-04-28', 'Female', '56546', 'dfgved', 'admin', 'tgher', 45555, 'images/india.jpg'),
-(103, 'binaaa', 'sdsf@gmail.com', '1234', '2023-05-04', 'Female', '24', 'USA', 'admin', 'mba', 1222222, 'images/FORMETING_QUE PG(5).png');
+(104, 'bina', 'bina@gmail.com', '1234', '2023-04-12', 'Female', '9879876748', 'america', 'admin', 'mba', 25000, 'dipu.jpg'),
+(105, 'janvi', 'janvi@gmail.com', '1234', '2023-04-12', 'Female', '9867575409', 'india', 'superviser', 'mba', 20000, 'download (1).jpeg'),
+(106, 'mina', 'mina@gmail.com', '1234', '2023-04-13', 'Female', '9876534322', 'wt34', 'rtre', 'rg4ereg', 4554, '1548982.jpg'),
+(107, 'sanaya', 's@gmail.com', '1234', '2023-04-06', 'Female', '9867565434', 'kjgf', 'klhgg', 'jfytr', 9897, 'dipu.jpg'),
+(108, 'nita', 'nita@gmail.com', '1234', '2023-03-29', 'Female', '9876765486', 'america', 'admin', 'mba', 65654, '1548982.jpg'),
+(109, 'ruchi', 'ruchi@gmail.com', '1234', '2023-04-04', 'Female', '9876565432', 'wt34', 'superviser', 'mba', 78566, '330px-Elon_Musk_Royal_Society.jpg'),
+(110, 'chandani', 'c@gmail.com', '1234', '2023-04-04', 'Female', '986432356', 'america', 'admin', 'mba', 9865, '1-5.jpg'),
+(111, 'meera', 'm@gmail.com', '1234', '2023-04-12', 'Female', '8675564233', 'sfewef', 'ewf', ',nhj', 8966, 'me.png');
 
 -- --------------------------------------------------------
 
@@ -60,9 +65,9 @@ INSERT INTO `add_emp` (`id`, `full_name`, `email`, `password`, `birthdate`, `gen
 
 CREATE TABLE `alogin` (
   `id` int(11) NOT NULL,
-  `email` tinytext CHARACTER SET latin1 NOT NULL,
-  `password` longtext CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `email` tinytext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `password` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `alogin`
@@ -78,26 +83,22 @@ INSERT INTO `alogin` (`id`, `email`, `password`) VALUES
 --
 
 CREATE TABLE `employee_leave` (
-  `id` int(11) NOT NULL,
+  `id` int(11) DEFAULT NULL,
+  `token` int(11) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL,
   `reason` varchar(100) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee_leave`
 --
 
-INSERT INTO `employee_leave` (`id`, `start`, `end`, `reason`, `status`) VALUES
-(0, '2023-03-27', '2023-03-30', 'faf', 'Pending'),
-(0, '2023-05-03', '2023-05-05', 'covid 3', 'Pending'),
-(0, '2023-05-01', '2023-05-03', 'aaa', 'Pending'),
-(0, '2023-04-11', '2023-04-13', 'fever', 'Pending'),
-(0, '0000-00-00', '0000-00-00', '', 'Pending'),
-(0, '0000-00-00', '0000-00-00', '', 'Pending'),
-(0, '2023-04-26', '2023-04-28', 'covid 3', 'Pending'),
-(0, '2023-04-03', '2023-04-11', 'covid 3', 'Pending');
+INSERT INTO `employee_leave` (`id`, `token`, `full_name`, `start`, `end`, `reason`, `status`) VALUES
+(101, 17, '', '2023-04-03', '2023-04-21', 'accident', '3'),
+(101, 18, '', '2023-04-19', '2023-04-22', 'holiday', '3');
 
 -- --------------------------------------------------------
 
@@ -113,18 +114,15 @@ CREATE TABLE `project` (
   `subdate` date DEFAULT NULL,
   `mark` int(11) NOT NULL,
   `status` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `project`
 --
 
 INSERT INTO `project` (`pid`, `eid`, `pname`, `duedate`, `subdate`, `mark`, `status`) VALUES
-(9, 17, 'shop', '2023-04-19', '2023-04-08', 6, 'Submitted'),
-(10, 15, 'train', '2023-04-13', '2023-04-10', 5, 'Submitted'),
-(12, 37, 'plan', '2023-04-04', '2023-04-10', 0, 'Submitted'),
-(15, 17, 'coldrink', '2023-03-28', '2023-04-11', 4, 'Submitted'),
-(16, 42, 'Junkyard', '2023-04-03', '2023-04-13', 5, 'Submitted');
+(9, 101, 'shop', '2023-04-19', '2023-04-08', 6, 'Submitted'),
+(28, 104, 'train', '2023-04-11', NULL, 0, 'Due');
 
 -- --------------------------------------------------------
 
@@ -135,7 +133,7 @@ INSERT INTO `project` (`pid`, `eid`, `pname`, `duedate`, `subdate`, `mark`, `sta
 CREATE TABLE `rank` (
   `eid` int(11) NOT NULL,
   `points` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rank`
@@ -234,7 +232,15 @@ INSERT INTO `rank` (`eid`, `points`) VALUES
 (100, 0),
 (101, 0),
 (102, 0),
-(103, 0);
+(103, 0),
+(104, 0),
+(105, 0),
+(106, 0),
+(107, 0),
+(108, 0),
+(109, 0),
+(110, 0),
+(111, 0);
 
 -- --------------------------------------------------------
 
@@ -247,7 +253,7 @@ CREATE TABLE `salary` (
   `base` int(11) NOT NULL,
   `bonus` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `salary`
@@ -353,7 +359,15 @@ INSERT INTO `salary` (`id`, `base`, `bonus`, `total`) VALUES
 (100, 15000, 0, 15000),
 (101, 54645, 0, 54645),
 (102, 45555, 0, 45555),
-(103, 1222222, 0, 1222222);
+(103, 1222222, 0, 1222222),
+(104, 25000, 0, 25000),
+(105, 20000, 0, 20000),
+(106, 4554, 0, 4554),
+(107, 9897, 0, 9897),
+(108, 65654, 0, 65654),
+(109, 78566, 0, 78566),
+(110, 9865, 0, 9865),
+(111, 8966, 0, 8966);
 
 --
 -- Indexes for dumped tables
@@ -370,6 +384,13 @@ ALTER TABLE `add_emp`
 --
 ALTER TABLE `alogin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee_leave`
+--
+ALTER TABLE `employee_leave`
+  ADD PRIMARY KEY (`token`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `project`
@@ -391,7 +412,7 @@ ALTER TABLE `salary`
 -- AUTO_INCREMENT for table `add_emp`
 --
 ALTER TABLE `add_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `alogin`
@@ -400,16 +421,22 @@ ALTER TABLE `alogin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `employee_leave`
+--
+ALTER TABLE `employee_leave`
+  MODIFY `token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
